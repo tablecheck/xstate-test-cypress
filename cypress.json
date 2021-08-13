@@ -1,0 +1,9 @@
+{
+  "baseUrl": "http://localhost:8080",
+  "fixturesFolder": false,
+  "env": {},
+  "reporter": "junit",
+  "reporterOptions": {
+    "mochaFile": "junit/cypress-[hash].xml"
+  }
+}
