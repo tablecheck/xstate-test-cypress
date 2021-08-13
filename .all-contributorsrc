@@ -1,0 +1,15 @@
+{
+  "projectName": "xstate-test-cypress",
+  "projectOwner": "tablecheck",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [],
+  "contributorsPerLine": 6,
+  "skipCi": true
+}

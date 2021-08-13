@@ -1,0 +1,71 @@
+{
+  "name": "xstate-test-cypress",
+  "description": "Utilities for adapting @xstate/test to work more easily with cypress 7+",
+  "license": "MIT",
+  "author": "TableCheck Inc.",
+  "homepage": "https://github.com/tablecheck/xstate-test-cypress#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tablecheck/xstate-test-cypress.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tablecheck/xstate-test-cypress/issues"
+  },
+  "version": "1.0.0-0",
+  "keywords": [
+    "cypress",
+    "test",
+    "xstate",
+    "xstate-test"
+  ],
+  "main": "./lib/es5/index.js",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "audit": "tablecheck-scripts auditjs",
+    "audit:ci": "tablecheck-scripts auditjs --ci",
+    "build": "tablecheck-scripts build-lib",
+    "coverage-summary": "tablecheck-scripts coverage-summary",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "format": "tablecheck-scripts lint --fix --skip-typescript",
+    "lint": "tablecheck-scripts lint",
+    "prepare": "npm run build",
+    "start": "npm run test:watch",
+    "start:test-skeleton": "node ./scripts/start.js",
+    "test": "start-server-and-test start:test-skeleton http://localhost:8080/ cypress:run",
+    "test:watch": "start-server-and-test start:test-skeleton http://localhost:8080/ cypress:open",
+    "tsc": "tablecheck-scripts tsc",
+    "tsc:watch": "tablecheck-scripts tsc -w"
+  },
+  "peerDependencies": {
+    "@xstate/test": "^0.4.2",
+    "cypress": "^7 || ^8",
+    "xstate": "^4"
+  },
+  "devDependencies": {
+    "@auto-it/all-contributors": "10.32.0",
+    "@auto-it/conventional-commits": "10.32.0",
+    "@auto-it/first-time-contributor": "10.32.0",
+    "@auto-it/npm": "10.32.0",
+    "@auto-it/released": "10.32.0",
+    "@auto-it/slack": "10.32.0",
+    "@commitlint/cli": "13.1.0",
+    "@tablecheck/commitlint-config": "1.0.2",
+    "@tablecheck/scripts": "1.5.1",
+    "@xstate/test": "0.4.2",
+    "auditjs": "4.0.32",
+    "auto": "10.32.0",
+    "cypress": "8.2.0",
+    "husky": "7.0.2",
+    "live-server": "1.2.1",
+    "prettier": "2.4.1",
+    "start-server-and-test": "1.14.0",
+    "todomvc-app-css": "2.4.1",
+    "todomvc-common": "1.0.5",
+    "xstate": "4.23.1"
+  }
+}
