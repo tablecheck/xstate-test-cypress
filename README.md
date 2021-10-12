@@ -1,9 +1,7 @@
 # xstate-test-cypress
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Utilities for adapting @xstate/test to work more easily with cypress 7+
@@ -79,6 +77,12 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/SimeonC"><img src="https://avatars.githubusercontent.com/u/1085899?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Simeon Cheeseman</b></sub></a><br /><a href="https://github.com/tablecheck/xstate-test-cypress/commits?author=SimeonC" title="Documentation">📖</a> <a href="#infra-SimeonC" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/tablecheck/xstate-test-cypress/commits?author=SimeonC" title="Tests">⚠️</a> <a href="https://github.com/tablecheck/xstate-test-cypress/commits?author=SimeonC" title="Code">💻</a></td>
+  </tr>
+</table>
+
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
