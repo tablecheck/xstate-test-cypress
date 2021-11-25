@@ -161,8 +161,18 @@ export interface CypressTestEventsConfig<TTestContext> {
     | CypressTestEventConfig<TTestContext>;
 }
 
-export function createCypressModel<TTestContext>(
-  machine: StateMachine<any, any, any>,
+export function createCypressModel<
+  TMachine extends UpdatableCypressMachine<any, any, any, any>,
+  TTestContext = TMachine extends UpdatableCypressMachine<
+    infer TContext,
+    any,
+    any,
+    any
+  >
+    ? TContext
+    : never
+>(
+  machine: TMachine,
   eventMap: CypressTestEventsConfig<TTestContext>
 ): TestModel<TTestContext, any> {
   const cypressEventMap: TestModel<TTestContext, any>['options']['events'] = {};
