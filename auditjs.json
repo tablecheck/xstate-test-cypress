@@ -77,6 +77,45 @@
           "reference": "https://ossindex.sonatype.org/vulnerability/64cd5f21-8af4-4eae-ac7d-a53241ea693a?component-type=npm&component-name=glob-parent&utm_source=auditjs&utm_medium=integration&utm_content=4.0.30"
         }
       ]
+    },
+    {
+      "coordinates": "pkg:npm/tar@6.1.8",
+      "description": "tar for node",
+      "reference": "https://ossindex.sonatype.org/component/pkg:npm/tar@6.1.8?utm_source=auditjs&utm_medium=integration&utm_content=4.0.32",
+      "vulnerabilities": [
+        {
+          "id": "cfd76b41-466a-4012-989f-7ad0d20ffde1",
+          "title": "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+          "description": "The software uses external input to construct a pathname that is intended to identify a file or directory that is located underneath a restricted parent directory, but the software does not properly neutralize special elements within the pathname that can cause the pathname to resolve to a location that is outside of the restricted directory.",
+          "cvssScore": 7.5,
+          "cvssVector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "reference": "https://ossindex.sonatype.org/vulnerability/cfd76b41-466a-4012-989f-7ad0d20ffde1?component-type=npm&component-name=tar&utm_source=auditjs&utm_medium=integration&utm_content=4.0.32"
+        },
+        {
+          "id": "3aef21de-3c46-4e8b-99a9-322df2a07bcd",
+          "title": "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+          "description": "The software uses external input to construct a pathname that is intended to identify a file or directory that is located underneath a restricted parent directory, but the software does not properly neutralize special elements within the pathname that can cause the pathname to resolve to a location that is outside of the restricted directory.",
+          "cvssScore": 7.5,
+          "cvssVector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "reference": "https://ossindex.sonatype.org/vulnerability/3aef21de-3c46-4e8b-99a9-322df2a07bcd?component-type=npm&component-name=tar&utm_source=auditjs&utm_medium=integration&utm_content=4.0.32"
+        }
+      ]
+    },
+    {
+      "coordinates": "pkg:npm/ansi-html@0.0.7",
+      "description": "An elegant lib that converts the chalked (ANSI) text to HTML.",
+      "reference": "https://ossindex.sonatype.org/component/pkg:npm/ansi-html@0.0.7?utm_source=auditjs&utm_medium=integration&utm_content=4.0.32",
+      "vulnerabilities": [
+        {
+          "id": "849e9fed-44e8-4593-a4ca-61026c4b454f",
+          "title": "[CVE-2021-23424] This affects all versions of package ansi-html. If an attacker provides a malici...",
+          "description": "This affects all versions of package ansi-html. If an attacker provides a malicious string, it will get stuck processing the input for an extremely long time.",
+          "cvssScore": 7.5,
+          "cvssVector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "cve": "CVE-2021-23424",
+          "reference": "https://ossindex.sonatype.org/vulnerability/849e9fed-44e8-4593-a4ca-61026c4b454f?component-type=npm&component-name=ansi-html&utm_source=auditjs&utm_medium=integration&utm_content=4.0.32"
+        }
+      ]
     }
   ],
   "ignore": [
@@ -94,6 +133,15 @@
     },
     {
       "id": "64cd5f21-8af4-4eae-ac7d-a53241ea693a"
+    },
+    {
+      "id": "cfd76b41-466a-4012-989f-7ad0d20ffde1"
+    },
+    {
+      "id": "3aef21de-3c46-4e8b-99a9-322df2a07bcd"
+    },
+    {
+      "id": "849e9fed-44e8-4593-a4ca-61026c4b454f"
     }
   ]
 }

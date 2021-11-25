@@ -88,7 +88,7 @@ const testMachine = createCypressMachine<TestContext, TestEvents>(
   }
 );
 
-const testModel = createCypressModel<TestContext>(testMachine, {
+const testModel = createCypressModel(testMachine, {
   TODO_EDIT: () => cy.get('.todo-list li').eq(0).dblclick(),
   TODO_UPDATE: {
     cases: [{ value: 'Value one' }, { value: 'Value 2' }],
