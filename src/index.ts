@@ -24,22 +24,21 @@ function adaptCypressMeta(
     const metaTest = testMeta?.[keyPath];
     if (metaTest) {
       stateConfig[stateKey].meta = stateConfig[stateKey].meta || {};
-      stateConfig[stateKey].meta.test = (testContext: any) =>
-        new Cypress.Promise((resolve) => {
-          cy.log(`XState: Test state "${keyPath}"`);
-          metaTest(testContext).then(resolve);
-        });
+      stateConfig[stateKey].meta.test = (testContext: any) => {
+        cy.log(`XState: Test state "${keyPath}"`);
+        metaTest(testContext);
+      };
     } else if (stateConfig[stateKey].meta?.test) {
       const originalTest = stateConfig[stateKey].meta.test;
-      stateConfig[stateKey].meta.test = (testContext: any, state: any) =>
-        new Cypress.Promise((resolve) => {
-          cy.log(`XState: Test state "${keyPath}"`);
-          originalTest(testContext, state).then(resolve);
-        });
+      stateConfig[stateKey].meta.test = (testContext: any, state: any) => {
+        cy.log(`XState: Test state "${keyPath}"`);
+        originalTest(testContext, state);
+      };
     } else {
       stateConfig[stateKey].meta = stateConfig[stateKey].meta || {};
-      stateConfig[stateKey].meta.test = () =>
+      stateConfig[stateKey].meta.test = () => {
         cy.log(`XState: state "${keyPath}"`);
+      };
     }
     if (stateConfig[stateKey].states) {
       adaptCypressMeta(stateConfig[stateKey].states!, testMeta, keyPath);
@@ -179,27 +178,22 @@ export function createCypressModel<
   machine.events.forEach((eventKey) => {
     const eventLog = () => cy.log(`XState: Trigger Event "${eventKey}"`);
     if (eventKey === 'DO_NOTHING') {
-      cypressEventMap[eventKey] = () =>
-        new Cypress.Promise((resolve) => {
-          cy.log(`XState: Event "${eventKey}"`).then(resolve);
-        });
+      cypressEventMap[eventKey] = () => {
+        cy.log(`XState: Event "${eventKey}"`);
+      };
     } else if (!eventMap[eventKey]) {
-      cypressEventMap[eventKey] = () =>
-        new Cypress.Promise((resolve) => {
-          cy.log(`XState: Unhandled Event "${eventKey}"`).then(resolve);
-        });
+      cypressEventMap[eventKey] = () => {
+        cy.log(`XState: Unhandled Event "${eventKey}"`);
+      };
     } else if (typeof eventMap[eventKey] === 'function') {
       const executor = eventMap[eventKey] as CypressEventExecutor<
         TTestContext,
         EventCase
       >;
-      cypressEventMap[eventKey] = (testContext, event) =>
-        new Cypress.Promise((resolve) => {
-          eventLog();
-          const result = executor(testContext, event as unknown as EventCase);
-          if (!result) resolve();
-          else result.then(resolve);
-        });
+      cypressEventMap[eventKey] = (testContext, event) => {
+        eventLog();
+        executor(testContext, event as unknown as EventCase);
+      };
     } else if (
       typeof eventMap[eventKey] === 'object' &&
       typeof (
@@ -212,16 +206,10 @@ export function createCypressModel<
       >;
       cypressEventMap[eventKey] = {
         ...executorConfig,
-        exec: (testContext, event) =>
-          new Cypress.Promise((resolve) => {
-            eventLog();
-            const result = executorConfig.exec(
-              testContext,
-              event as unknown as EventCase
-            );
-            if (!result) resolve();
-            else result.then(resolve);
-          })
+        exec: (testContext, event) => {
+          eventLog();
+          executorConfig.exec(testContext, event as unknown as EventCase);
+        }
       };
     }
   });
