@@ -118,10 +118,14 @@ testPlans.forEach((plan) => {
         cy.clearLocalStorage();
         cy.get('.new-todo')
           .type('Hello World!{enter}')
-          .then(() => {
-            path.test({ todoCount: 1 });
-          });
+          .then(() => path.test({ todoCount: 1 }));
       });
     });
+  });
+});
+
+describe('coverage', () => {
+  it('should have visited all nodes', () => {
+    testModel.testCoverage();
   });
 });

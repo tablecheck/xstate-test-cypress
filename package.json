@@ -43,7 +43,7 @@
   },
   "peerDependencies": {
     "@xstate/test": "^0.4.2",
-    "cypress": "^7 || ^8",
+    "cypress": "^8 || ^9",
     "xstate": "^4"
   },
   "devDependencies": {
@@ -59,7 +59,7 @@
     "@xstate/test": "0.4.2",
     "auditjs": "4.0.32",
     "auto": "10.32.0",
-    "cypress": "8.2.0",
+    "cypress": "9.1.1",
     "husky": "7.0.2",
     "live-server": "1.2.1",
     "prettier": "2.4.1",
