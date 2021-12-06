@@ -1,3 +1,15 @@
+# v1.3.1 (Mon Dec 06 2021)
+
+#### 🐛 Bug Fix
+
+- fix: correctly runs all tests in integration mode [#5](https://github.com/tablecheck/xstate-test-cypress/pull/5) ([@SimeonC](https://github.com/SimeonC))
+
+#### Authors: 1
+
+- Simeon Cheeseman ([@SimeonC](https://github.com/SimeonC))
+
+---
+
 # v2.0.0 (Thu Nov 25 2021)
 
 :tada: This release contains work from a new contributor! :tada:
