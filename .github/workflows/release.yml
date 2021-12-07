@@ -38,6 +38,12 @@ jobs:
         with:
           start: npm run start:test-skeleton
 
+      - name: Cypress components run
+        uses: cypress-io/github-action@v2
+        with:
+          install: false
+          command: npm run test:component
+
       - name: Create Release ✨
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_BOT_TOKEN }}

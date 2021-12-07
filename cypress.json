@@ -5,5 +5,9 @@
   "reporter": "junit",
   "reporterOptions": {
     "mochaFile": "junit/cypress-[hash].xml"
+  },
+  "component": {
+    "testFiles": "**/*.cypress.{ts,tsx}",
+    "componentFolder": "cypress/components"
   }
 }
