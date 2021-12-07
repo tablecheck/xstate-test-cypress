@@ -1,5 +1,10 @@
 /// <reference types="cypress" />
-import { createCypressMachine, createCypressModel } from '../../src';
+import {
+  checkCoverage,
+  createCypressMachine,
+  createCypressModel,
+  simpleExecutePlan
+} from '../../src';
 
 type ValueEvents = {
   type: 'TODO_EDIT' | 'TODO_UPDATE';
@@ -109,23 +114,12 @@ const testModel = createCypressModel(testMachine, {
   }
 });
 
-const testPlans = testModel.getSimplePathPlans();
-testPlans.forEach((plan) => {
-  describe(plan.description, () => {
-    plan.paths.forEach((path) => {
-      it(path.description, () => {
-        cy.visit('/');
-        cy.clearLocalStorage();
-        cy.get('.new-todo')
-          .type('Hello World!{enter}')
-          .then(() => path.test({ todoCount: 1 }));
-      });
-    });
+context('todo tests', () => {
+  simpleExecutePlan(testModel.getSimplePathPlans(), () => {
+    cy.visit('/');
+    cy.clearLocalStorage();
+    cy.get('.new-todo').type('Hello World!{enter}');
+    return { todoCount: 1 };
   });
-});
-
-describe('coverage', () => {
-  it('should have visited all nodes', () => {
-    testModel.testCoverage();
-  });
+  checkCoverage(testModel);
 });

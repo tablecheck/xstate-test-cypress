@@ -99,10 +99,16 @@ jobs:
       - name: Restore npm installs and Lerna setup
         run: npm i
 
-      - name: Cypress run
+      - name: Cypress integration run
         uses: cypress-io/github-action@v2
         with:
           start: npm run start:test-skeleton
+
+      - name: Cypress components run
+        uses: cypress-io/github-action@v2
+        with:
+          install: false
+          command: npm run test:component
 
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1

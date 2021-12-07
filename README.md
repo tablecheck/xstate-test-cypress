@@ -1,19 +1,26 @@
 # xstate-test-cypress
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Utilities for adapting @xstate/test to work more easily with cypress 7+
 
 ## Usage
 
-Basic usage is as follows, for more complete usage with types refer to `/cypress/integration/todo.spec.ts`.
+Basic usage is as follows, for more complete usage with types refer to `/cypress/integration/todo.spec.ts` and `/cypress/components/*` folder for component testing example.
 
 Note that `testContext` is the object that you pass in to `plan.test(...)`, it has no relation to the context of the machine.
 
 ```js
-import { createCypressMachine, createCypressModel } from 'xstate-test-cypress';
+import {
+  checkCoverage,
+  createCypressMachine,
+  createCypressModel,
+  simpleExecutePlan
+} from 'xstate-test-cypress';
 
 const testMachine = createCypressMachine(
   {
@@ -31,7 +38,6 @@ const testMachine = createCypressMachine(
       other: {}
     }
   },
-  options,
   {
     parent: (testContext) => cy.get('something').should('be.visible'),
     'parent.child': (testContext) => {
@@ -53,18 +59,12 @@ const testModel = createCypressModel(testMachine, {
   }
 });
 
-const testPlans = testModel.getSimplePathPlans();
-testPlans.forEach((plan) => {
-  describe(plan.description, () => {
-    plan.paths.forEach((path) => {
-      it(path.description, () => {
-        cy.visit('/');
-        cy.wait(0).then(() => {
-          path.test({ someCounter: 1 });
-        });
-      });
-    });
+context('example tests', () => {
+  simpleExecutePlan(testModel.getSimplePathPlans(), () => {
+    cy.visit('/');
+    return { someCounter: 1 };
   });
+  checkCoverage(testModel);
 });
 ```
 
