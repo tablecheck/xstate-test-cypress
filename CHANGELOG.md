@@ -1,3 +1,15 @@
+# v1.4.0 (Tue Dec 07 2021)
+
+#### 🚀 Enhancement
+
+- feat: add more utils and options for component testing as well [#6](https://github.com/tablecheck/xstate-test-cypress/pull/6) ([@SimeonC](https://github.com/SimeonC))
+
+#### Authors: 1
+
+- Simeon Cheeseman ([@SimeonC](https://github.com/SimeonC))
+
+---
+
 # v1.3.1 (Mon Dec 06 2021)
 
 #### 🐛 Bug Fix
