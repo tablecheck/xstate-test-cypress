@@ -1,3 +1,15 @@
+# v1.5.0 (Wed Feb 16 2022)
+
+#### 🚀 Enhancement
+
+- feat: support updating/extending a model as well as a machine [#7](https://github.com/tablecheck/xstate-test-cypress/pull/7) ([@SimeonC](https://github.com/SimeonC))
+
+#### Authors: 1
+
+- Simeon Cheeseman ([@SimeonC](https://github.com/SimeonC))
+
+---
+
 # v1.4.0 (Tue Dec 07 2021)
 
 #### 🚀 Enhancement
