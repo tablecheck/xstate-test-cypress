@@ -68,13 +68,13 @@
     "@xstate/test": "0.5.0",
     "auditjs": "4.0.33",
     "auto": "10.32.3",
-    "cypress": "9.1.1",
+    "cypress": "9.5.0",
     "husky": "7.0.4",
     "live-server": "1.2.1",
     "prettier": "2.5.1",
     "start-server-and-test": "1.14.0",
     "todomvc-app-css": "2.4.1",
     "todomvc-common": "1.0.5",
-    "xstate": "4.26.1"
+    "xstate": "4.30.1"
   }
 }

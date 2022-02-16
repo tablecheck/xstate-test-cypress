@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { TestModel } from '@xstate/test';
 import {
   AnyEventObject,
   EventObject,
@@ -34,10 +35,30 @@ export interface UpdatableCypressMachine<
    * @param testMeta
    * @param options
    */
-  update(
-    testMeta?: null | Record<string, TestMetaFunction<TTestContext>>,
+  update<TNewTestContext = TTestContext>(
+    testMeta?: null | Record<string, TestMetaFunction<TNewTestContext>>,
     options?: null | Partial<MachineOptions<TContext, TEvent | DoNothingEvent>>
-  ): StateMachine<TContext, any, TEvent | DoNothingEvent, TTypestate>;
+  ): UpdatableCypressMachine<TNewTestContext, TEvent, TContext, TTypestate>;
+}
+
+export interface UpdateableCypressModel<
+  TTestContext = Record<string, any>,
+  TEvent extends EventObject = AnyEventObject,
+  TContext = Record<never, never>,
+  TTypestate extends Typestate<TContext> = {
+    value: any;
+    context: TContext;
+  }
+> extends TestModel<TTestContext, TContext> {
+  /**
+   * Pass null if you want to clear the option completely, otherwise it will default to the original value. Note that values are not merged and all old values you don't want to change need to be passed
+   * @param testMeta
+   * @param eventMap
+   */
+  update<TNewTestContext = TTestContext>(
+    testMeta?: null | Record<string, TestMetaFunction<TNewTestContext>>,
+    eventMap?: CypressTestEventsConfig<TNewTestContext>
+  ): UpdateableCypressModel<TNewTestContext, TEvent, TContext, TTypestate>;
 }
 
 export interface EventCase {
