@@ -18,13 +18,18 @@ import {
 } from './types';
 
 function adaptCypressMeta(
-  stateConfig: StatesConfig<any, any, any>,
+  stateConfigArgument: StatesConfig<any, any, any, any>,
   testMeta?: Partial<TestMetaConfig<any, any>>,
   parentKeyPath = ''
-): void {
+): StatesConfig<any, any, any, any> {
+  const stateConfig = { ...stateConfigArgument };
   Object.keys(stateConfig).forEach((stateKey) => {
     const keyPath = parentKeyPath ? `${parentKeyPath}.${stateKey}` : stateKey;
     const metaTest = testMeta?.[keyPath];
+    stateConfig[stateKey] = { ...stateConfig[stateKey] };
+    if (stateConfig[stateKey].meta) {
+      stateConfig[stateKey].meta = { ...stateConfig[stateKey].meta };
+    }
     if (metaTest) {
       stateConfig[stateKey].meta = stateConfig[stateKey].meta || {};
       stateConfig[stateKey].meta.test = (testContext: any) => {
@@ -44,9 +49,14 @@ function adaptCypressMeta(
       };
     }
     if (stateConfig[stateKey].states) {
-      adaptCypressMeta(stateConfig[stateKey].states!, testMeta, keyPath);
+      stateConfig[stateKey].states = adaptCypressMeta(
+        stateConfig[stateKey].states!,
+        testMeta,
+        keyPath
+      );
     }
   });
+  return stateConfig;
 }
 
 export function createCypressMachine<
@@ -67,14 +77,22 @@ export function createCypressMachine<
   options?: Partial<MachineOptions<TContext, TEvent | DoNothingEvent>>
 ): UpdatableCypressMachine<TTestContext, TEvent, TContext, TTypestate> {
   if (config.states) {
-    adaptCypressMeta(config.states, testMeta);
+    config.states = adaptCypressMeta(config.states as any, testMeta);
   }
   const result = createMachine<TContext, TEvent | DoNothingEvent, TTypestate>(
     config,
     options
-  ) as UpdatableCypressMachine<TTestContext, TEvent, TContext, TTypestate>;
-  result.update = (newTestMeta, newOptions) =>
-    createCypressMachine<TTestContext, TEvent, TContext, TTypestate>(
+  ) as any as UpdatableCypressMachine<
+    TTestContext,
+    TEvent,
+    TContext,
+    TTypestate
+  >;
+  result.update = <TNewTestContext = TTestContext>(
+    newTestMeta: any,
+    newOptions: any
+  ) =>
+    createCypressMachine<TNewTestContext, TEvent, TContext, TTypestate>(
       config,
       newTestMeta === null ? undefined : newTestMeta || testMeta,
       newOptions === null ? undefined : newOptions || options

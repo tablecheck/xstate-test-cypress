@@ -74,3 +74,26 @@ context('mount in machine step', () => {
   simpleExecutePlan(propsTestModel.getSimplePathPlans());
   checkCoverage(propsTestModel);
 });
+
+context('update model', () => {
+  simpleExecutePlan(
+    propsTestModel
+      .update(
+        {
+          init: () => cy.get('button').should('not.exist'),
+          sad: () => cy.get('button').should('have.text', 'modified sad'),
+          happy: () => cy.get('button').should('have.text', 'modified happy')
+        },
+        {
+          INIT: () => {
+            mount(
+              <Component happyLabel="modified happy" sadLabel="modified sad" />
+            );
+          },
+          TOGGLE: () => cy.get('button').click()
+        }
+      )
+      .getSimplePathPlans()
+  );
+  checkCoverage(propsTestModel);
+});

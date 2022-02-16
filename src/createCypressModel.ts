@@ -6,7 +6,8 @@ import {
   CypressTestEventConfig,
   CypressTestEventsConfig,
   EventCase,
-  UpdatableCypressMachine
+  UpdatableCypressMachine,
+  UpdateableCypressModel
 } from './types';
 
 export function createCypressModel<
@@ -22,7 +23,7 @@ export function createCypressModel<
 >(
   machine: TMachine,
   eventMap: CypressTestEventsConfig<TTestContext>
-): TestModel<TTestContext, any> {
+): UpdateableCypressModel<TTestContext> {
   const cypressEventMap: TestModel<TTestContext, any>['options']['events'] = {};
   machine.events.forEach((eventKey) => {
     const eventLog = () => cy.log(`XState: Trigger Event "${eventKey}"`);
@@ -62,6 +63,17 @@ export function createCypressModel<
       };
     }
   });
-  return createModel<TTestContext, any>(machine).withEvents(cypressEventMap);
+  const result = createModel<TTestContext, any>(machine).withEvents(
+    cypressEventMap
+  ) as UpdateableCypressModel<TTestContext>;
+  result.update = <TNewTestContext = TTestContext>(
+    newTestMeta: any,
+    newTestEvents: any
+  ) =>
+    createCypressModel<TMachine, TNewTestContext>(
+      machine.update<TNewTestContext>(newTestMeta) as TMachine,
+      newTestEvents || eventMap
+    );
+  return result;
 }
 /* eslint-enable @typescript-eslint/no-explicit-any */

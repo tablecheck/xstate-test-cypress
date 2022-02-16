@@ -1,7 +1,9 @@
 # xstate-test-cypress
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Utilities for adapting @xstate/test to work more easily with cypress 7+
@@ -62,6 +64,22 @@ context('example tests', () => {
     cy.visit('/');
     return { someCounter: 1 };
   });
+  checkCoverage(testModel);
+});
+
+context('updated tests', () => {
+  simpleExecutePlan(
+    testModel
+      .update(
+        { other: () => cy.log('new state check') },
+        { SIMPLE: () => cy.log('new event execution') }
+      )
+      .getSimplePathPlans(),
+    () => {
+      cy.visit('/');
+      return { someCounter: 1 };
+    }
+  );
   checkCoverage(testModel);
 });
 ```
